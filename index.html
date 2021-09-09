@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>Opencv JS</title>
+    <div style="visibility: hidden;">
+        <script async src="js/opencv.js" onload="openCvReady();"></script>
+        <!-- <script async src="js/controls/OrbitControls.js"></script> -->
+        <script src="js/utils.js"></script>
+        <script src="js/face-detection.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+    </div>
+</head>
+<style>
+    * {
+        margin: 0;
+    }
+</style>
+
+<body>
+    <div style="display: none;">
+        <video id="cam_input" height="480" width="640"></video>
+        <canvas id=" canvas_output"></canvas>
+    </div>
+    <div id="app">
+        <svg style="border: 1px solid black; width:100vw; height: 100vh">
+
+            <!-- Shadow -->
+            <defs>
+                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                </filter>
+            </defs>
+            <polyline filter="url(#shadow)" fill-opacity="0.5" :points=" 
+                `${pyramid.p1.x} ${pyramid.p1.y}
+                , ${pyramid.p2.x} ${pyramid.p2.y}
+                , ${pyramid.p3.x} ${pyramid.p3.y}
+                , ${pyramid.p4.x + 100} ${pyramid.p4.y - 100}
+                `" />
+
+            <!-- Base -->
+            <polyline filter="url(#shadow)" :points="
+            `${pyramid.p1.x} ${pyramid.p1.y}
+            , ${pyramid.p2.x} ${pyramid.p2.y}
+            , ${pyramid.p3.x} ${pyramid.p3.y}
+            , ${pyramid.p4.x} ${pyramid.p4.y}
+            `" />
+            <!-- Left Side -->
+            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(150,150,150)" :points="
+            `${pyramid.p1.x} ${pyramid.p1.y}
+            , ${pyramid.p2.x} ${pyramid.p2.y}
+            , ${pyramid.p5.x} ${pyramid.p5.y}
+            `" />
+
+            <!-- Right Side -->
+            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(50,50,50)" :points="
+            `${pyramid.p3.x} ${pyramid.p3.y}
+            , ${pyramid.p4.x} ${pyramid.p4.y}
+            , ${pyramid.p5.x} ${pyramid.p5.y}
+            `" />
+
+            <!-- Top Side -->
+            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(70,70,70)" :points="
+            `${pyramid.p1.x} ${pyramid.p1.y}
+            , ${pyramid.p4.x} ${pyramid.p4.y}
+            , ${pyramid.p5.x} ${pyramid.p5.y}
+            `" />
+
+            <!-- Bottom Side -->
+            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(130,130,130)" :points="
+               `${pyramid.p2.x} ${pyramid.p2.y}
+               , ${pyramid.p3.x} ${pyramid.p3.y}
+               , ${pyramid.p5.x} ${pyramid.p5.y}
+               `" />
+
+        </svg>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            pyramid: {
+                p1: { x: 100, y: 100 },
+                p2: { x: 100, y: 500 },
+                p3: { x: 500, y: 500 },
+                p4: { x: 500, y: 100 },
+                p5: { x: 300, y: 300 },
+            },
+        },
+    })
+</script>
+
+</html>
