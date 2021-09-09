@@ -50,25 +50,21 @@ function openCvReady() {
 
                 // console.log(app.c1A[0]++);
 
-                app.pyramid.p5.x = 300 + (xf - 300) * 1;
-                app.pyramid.p5.y = 300 + (yf - 200) * -1;
-                // app.c2A[0] = 200 + (xf - 250) * coord_scale_factor;
-                // app.c2A[1] = 200 + (yf - 150) * -coord_scale_factor;
+                app.cube.p5.x = 150 + (xf - 250) * 0.3;
+                app.cube.p5.y = 150 + (yf - 120) * -0.3;
 
-                // provide to three.js the scaled coordinates of the face detection
-                // camera.position.x = (xf - 250) * coord_scale_factor;
-                // camera.position.y = (yf - 100) * coord_scale_factor;
-                // camera.position.z = camPosZ - Math.abs(xf - 250) * 0.005;
-                // camera.fov = 15 - Math.abs(xf - 250) * 0.0005;
-                // camera.updateProjectionMatrix();
-                // camera.lookAt(cube.position);
-                //console.log(camera.position);
+                app.cube.p6.x = 150 + (xf - 250) * 0.3;
+                app.cube.p6.y = 450 + (yf - 120) * -0.3;
 
-                // visualize the bounding box of the detected face
+                app.cube.p7.x = 450 + (xf - 250) * 0.3;
+                app.cube.p7.y = 450 + (yf - 120) * -0.3;
+
+                app.cube.p8.x = 450 + (xf - 250) * 0.3;
+                app.cube.p8.y = 150 + (yf - 120) * -0.3;
+
             } else {
-                // if there are no detections, provide to three.js the last values of the filtered coordinates
-                app.pyramid.p5.x = 300 + (xf - 300) * 1;
-                app.pyramid.p5.y = 300 + (yf - 200) * -1;
+                // app.cube.p5.x = 300 + (xf - 300) * 0.2;
+                // app.cube.p5.y = 300 + (yf - 200) * -0.2;
             }
 
             let delay = 1000 / FPS - (Date.now() - begin);

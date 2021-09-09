@@ -31,50 +31,82 @@
             <!-- Shadow -->
             <defs>
                 <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
                 </filter>
             </defs>
-            <polyline filter="url(#shadow)" fill-opacity="0.5" :points=" 
-                `${pyramid.p1.x} ${pyramid.p1.y}
-                , ${pyramid.p2.x} ${pyramid.p2.y}
-                , ${pyramid.p3.x} ${pyramid.p3.y}
-                , ${pyramid.p4.x + 100} ${pyramid.p4.y - 100}
+            <polyline filter="url(#shadow)" fill-opacity="0.2" :points=" 
+                `${cube.p1.x} ${cube.p1.y}
+                , ${cube.p2.x} ${cube.p2.y}
+                , ${cube.p3.x} ${cube.p3.y}
+                , ${cube.p3.x + 50} ${cube.p3.y - 50}
+                , ${cube.p4.x + 50} ${cube.p4.y - 50}
+                , ${cube.p1.x + 50} ${cube.p1.y - 50}
                 `" />
 
             <!-- Base -->
-            <polyline filter="url(#shadow)" :points="
-            `${pyramid.p1.x} ${pyramid.p1.y}
-            , ${pyramid.p2.x} ${pyramid.p2.y}
-            , ${pyramid.p3.x} ${pyramid.p3.y}
-            , ${pyramid.p4.x} ${pyramid.p4.y}
+            <polyline filter="url(#shadow)" fill="rgb(100,100,100)" :points="
+            `${cube.p1.x} ${cube.p1.y}
+            , ${cube.p2.x} ${cube.p2.y}
+            , ${cube.p3.x} ${cube.p3.y}
+            , ${cube.p4.x} ${cube.p4.y}
             `" />
+
             <!-- Left Side -->
             <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(150,150,150)" :points="
-            `${pyramid.p1.x} ${pyramid.p1.y}
-            , ${pyramid.p2.x} ${pyramid.p2.y}
-            , ${pyramid.p5.x} ${pyramid.p5.y}
+            `${cube.p1.x} ${cube.p1.y}
+            , ${cube.p2.x} ${cube.p2.y}
+            , ${cube.p6.x} ${cube.p6.y}
+            , ${cube.p5.x} ${cube.p5.y}
             `" />
 
             <!-- Right Side -->
             <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(50,50,50)" :points="
-            `${pyramid.p3.x} ${pyramid.p3.y}
-            , ${pyramid.p4.x} ${pyramid.p4.y}
-            , ${pyramid.p5.x} ${pyramid.p5.y}
+            `${cube.p3.x} ${cube.p3.y}
+            , ${cube.p4.x} ${cube.p4.y}
+            , ${cube.p8.x} ${cube.p8.y}
+            , ${cube.p7.x} ${cube.p7.y}
             `" />
 
             <!-- Top Side -->
             <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(70,70,70)" :points="
-            `${pyramid.p1.x} ${pyramid.p1.y}
-            , ${pyramid.p4.x} ${pyramid.p4.y}
-            , ${pyramid.p5.x} ${pyramid.p5.y}
+            `${cube.p1.x} ${cube.p1.y}
+            , ${cube.p4.x} ${cube.p4.y}
+            , ${cube.p8.x} ${cube.p8.y}
+            , ${cube.p5.x} ${cube.p5.y}
             `" />
 
             <!-- Bottom Side -->
             <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(130,130,130)" :points="
-               `${pyramid.p2.x} ${pyramid.p2.y}
-               , ${pyramid.p3.x} ${pyramid.p3.y}
-               , ${pyramid.p5.x} ${pyramid.p5.y}
+               `${cube.p2.x} ${cube.p2.y}
+               , ${cube.p3.x} ${cube.p3.y}
+               , ${cube.p7.x} ${cube.p7.y}
+               , ${cube.p6.x} ${cube.p6.y}
                `" />
+
+            <!-- Front Face -->
+            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(130,130,130)" :points="
+            `${cube.p5.x} ${cube.p5.y}
+            , ${cube.p6.x} ${cube.p6.y}
+            , ${cube.p7.x} ${cube.p7.y}
+            , ${cube.p8.x} ${cube.p8.y}
+            `" />
+
+            <foreignObject :x="cube.p5.x" :y="cube.p5.y " width="300" height="300">
+                <!--
+                  In the context of SVG embedded in an HTML document, the XHTML
+                  namespace could be omitted, but it is mandatory in the
+                  context of an SVG document
+                -->
+                <div style="margin: 1em;">
+                    <h2>Welcome to 2d 2 3D!</h2>
+
+                    <P>This is a new awesome technology.</P>
+                    <p>We can:</p>
+                    <ul>
+                        <li>Project 3D objects in a 2D screen</li>
+                    </ul>
+                </div>
+            </foreignObject>
 
         </svg>
     </div>
@@ -83,12 +115,15 @@
     var app = new Vue({
         el: '#app',
         data: {
-            pyramid: {
+            cube: {
                 p1: { x: 100, y: 100 },
                 p2: { x: 100, y: 500 },
                 p3: { x: 500, y: 500 },
                 p4: { x: 500, y: 100 },
-                p5: { x: 300, y: 300 },
+                p5: { x: 150, y: 150 },
+                p6: { x: 150, y: 450 },
+                p7: { x: 450, y: 450 },
+                p8: { x: 450, y: 150 },
             },
         },
     })
