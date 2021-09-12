@@ -16,6 +16,7 @@ Vue.component('d2-cuboid', {
             faces: {},
             lookingAtPoint: [10, 10, 1000],
             showVertices: true,
+            showEdges: true,
         }
     },
     created() {
@@ -34,6 +35,7 @@ Vue.component('d2-cuboid', {
     },
     component: {
         'd2-vertices': d2Vertices,
+        'd2-edges': d2Edges,
     },
     props: {
         width: Number,
@@ -43,14 +45,45 @@ Vue.component('d2-cuboid', {
     },
     template: `
     <g>
-        <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(0,0,0,0)"
-        :points="\`
-        \${cuboid[0][0] + position.x} \${cuboid[0][1] + position.y}, 
-        \${cuboid[1][0] + position.x} \${cuboid[1][1] + position.y}, 
-        \${cuboid[2][0] + position.x} \${cuboid[2][1] + position.y}, 
-        \${cuboid[3][0] + position.x} \${cuboid[3][1] + position.y}, 
-        \${cuboid[0][0] + position.x} \${cuboid[0][1] + position.y}
-        \`" />
+        <d2-edges :showEdges="showEdges" :edges="[
+            [cuboid[0][0] + position.x, cuboid[0][1] + position.y, cuboid[1][0] + position.x, cuboid[1][1] + position.y],
+            [cuboid[0][0] + position.x, cuboid[0][1] + position.y, cuboid[1][0] + position.x, cuboid[1][1] + position.y],
+
+            [cuboid[1][0] + position.x, cuboid[1][1] + position.y, cuboid[2][0] + position.x, cuboid[2][1] + position.y],
+            [cuboid[1][0] + position.x, cuboid[1][1] + position.y, cuboid[2][0] + position.x, cuboid[2][1] + position.y],
+
+            [cuboid[2][0] + position.x, cuboid[2][1] + position.y, cuboid[3][0] + position.x, cuboid[3][1] + position.y],
+            [cuboid[2][0] + position.x, cuboid[2][1] + position.y, cuboid[3][0] + position.x, cuboid[3][1] + position.y],
+
+            [cuboid[3][0] + position.x, cuboid[3][1] + position.y, cuboid[0][0] + position.x, cuboid[0][1] + position.y],
+            [cuboid[3][0] + position.x, cuboid[3][1] + position.y, cuboid[0][0] + position.x, cuboid[0][1] + position.y],
+
+            [cuboid[4][0] + position.x, cuboid[4][1] + position.y, cuboid[5][0] + position.x, cuboid[5][1] + position.y],
+            [cuboid[4][0] + position.x, cuboid[4][1] + position.y, cuboid[5][0] + position.x, cuboid[5][1] + position.y],
+
+            [cuboid[5][0] + position.x, cuboid[5][1] + position.y, cuboid[6][0] + position.x, cuboid[6][1] + position.y],
+            [cuboid[5][0] + position.x, cuboid[5][1] + position.y, cuboid[6][0] + position.x, cuboid[6][1] + position.y],
+
+            [cuboid[6][0] + position.x, cuboid[6][1] + position.y, cuboid[7][0] + position.x, cuboid[7][1] + position.y],
+            [cuboid[6][0] + position.x, cuboid[6][1] + position.y, cuboid[7][0] + position.x, cuboid[7][1] + position.y],
+
+            [cuboid[7][0] + position.x, cuboid[7][1] + position.y, cuboid[4][0] + position.x, cuboid[4][1] + position.y],
+            [cuboid[7][0] + position.x, cuboid[7][1] + position.y, cuboid[4][0] + position.x, cuboid[4][1] + position.y],
+
+            [cuboid[0][0] + position.x, cuboid[0][1] + position.y, cuboid[4][0] + position.x, cuboid[4][1] + position.y],
+            [cuboid[0][0] + position.x, cuboid[0][1] + position.y, cuboid[4][0] + position.x, cuboid[4][1] + position.y],
+
+            [cuboid[1][0] + position.x, cuboid[1][1] + position.y, cuboid[5][0] + position.x, cuboid[5][1] + position.y],
+            [cuboid[1][0] + position.x, cuboid[1][1] + position.y, cuboid[5][0] + position.x, cuboid[5][1] + position.y],
+
+            [cuboid[2][0] + position.x, cuboid[2][1] + position.y, cuboid[6][0] + position.x, cuboid[6][1] + position.y],
+            [cuboid[2][0] + position.x, cuboid[2][1] + position.y, cuboid[6][0] + position.x, cuboid[6][1] + position.y],
+
+            [cuboid[3][0] + position.x, cuboid[3][1] + position.y, cuboid[7][0] + position.x, cuboid[7][1] + position.y],
+            [cuboid[3][0] + position.x, cuboid[3][1] + position.y, cuboid[7][0] + position.x, cuboid[7][1] + position.y],
+        ]">
+        </d2-edges>
+
         <d2-vertices :showVertices="showVertices" :vertices="[
             [cuboid[0][0] + position.x, cuboid[0][1] + position.y],
             [cuboid[1][0] + position.x, cuboid[1][1] + position.y],
@@ -65,3 +98,12 @@ Vue.component('d2-cuboid', {
     </g>
     `
 })
+
+// <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(0,0,0,0)"
+// :points="\`
+// \${cuboid[0][0] + position.x} \${cuboid[0][1] + position.y}, 
+// \${cuboid[1][0] + position.x} \${cuboid[1][1] + position.y}, 
+// \${cuboid[2][0] + position.x} \${cuboid[2][1] + position.y}, 
+// \${cuboid[3][0] + position.x} \${cuboid[3][1] + position.y}, 
+// \${cuboid[0][0] + position.x} \${cuboid[0][1] + position.y}
+// \`" />
