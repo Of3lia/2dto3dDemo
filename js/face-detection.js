@@ -27,8 +27,6 @@ function openCvReady() {
         const alpha = 0.5;                  // low-pass filter correction factor
         const coord_scale_factor = 0.06;  // scaling factor to provide valid coords to three.js
 
-        var diffX = 0;
-
         function processVideo() {
             let begin = Date.now();
             cap.read(src);
@@ -45,10 +43,9 @@ function openCvReady() {
             // check if there are some detections
             if (faces.size() >= 1) {
                 // apply the low-apss filter to correct the face detection coordinates
+
                 xf = xf + alpha * (faces.get(0).x - xf);
                 yf = yf + alpha * (faces.get(0).y - yf);
-
-                // console.log(app.c1A[0]++);
 
                 app.cube.p5.x = 150 + (xf - 250) * 0.3;
                 app.cube.p5.y = 150 + (yf - 120) * -0.3;
@@ -62,15 +59,28 @@ function openCvReady() {
                 app.cube.p8.x = 450 + (xf - 250) * 0.3;
                 app.cube.p8.y = 150 + (yf - 120) * -0.3;
 
+
+                app.shadow.p1.x = app.initialShadow.p1.x + (xf - 250) * -0.05;
+                app.shadow.p1.y = app.initialShadow.p1.y + (yf - 120) * 0.05;
+
+                app.shadow.p2.x = app.initialShadow.p2.x + (xf - 250) * -0.05;
+                app.shadow.p2.y = app.initialShadow.p2.y + (yf - 120) * 0.05;
+
+                app.shadow.p3.x = app.initialShadow.p3.x + (xf - 250) * -0.05;
+                app.shadow.p3.y = app.initialShadow.p3.y + (yf - 120) * 0.05;
+
+                app.shadow.p4.x = app.initialShadow.p4.x + (xf - 250) * -0.05;
+                app.shadow.p4.y = app.initialShadow.p4.y + (yf - 120) * 0.05;
+
+
+
             } else {
                 // app.cube.p5.x = 300 + (xf - 300) * 0.2;
                 // app.cube.p5.y = 300 + (yf - 200) * -0.2;
             }
-
             let delay = 1000 / FPS - (Date.now() - begin);
             setTimeout(processVideo, delay);
         }
-
         setTimeout(processVideo, 0);
     };
 }

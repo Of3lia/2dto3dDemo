@@ -6,17 +6,22 @@
     <link rel="shortcut icon" href="#">
     <title>Opencv JS</title>
     <div style="visibility: hidden;">
-        <script async src="js/opencv.js" onload="openCvReady();"></script>
-        <!-- <script async src="js/controls/OrbitControls.js"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="components/vertices.js"></script>
+        <script src="components/cuboid.js"></script>
         <script src="js/utils.js"></script>
         <script src="js/face-detection.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+        <script async src="js/opencv.js" onload="openCvReady();"></script>
     </div>
 </head>
 <style>
     * {
         margin: 0;
+    }
+
+    [v-cloak] {
+        display: none;
     }
 </style>
 
@@ -25,13 +30,17 @@
         <video id="cam_input" height="480" width="640"></video>
         <canvas id=" canvas_output"></canvas>
     </div>
-    <div id="app">
+    <div id="app" v-cloak>
         <svg style="border: 1px solid black; width:100vw; height: 100vh">
+            <d2-cuboid :width=100></d2-cuboid>
+        </svg>
+
+        <svg style="display:none; border: 1px solid black; width:100vw; height: 100vh">
 
             <!-- Shadow -->
             <defs>
                 <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 </filter>
             </defs>
             <polyline filter="url(#shadow)" fill-opacity="0.2" :points=" 
@@ -44,11 +53,11 @@
                 `" />
 
             <!-- Base -->
-            <polyline filter="url(#shadow)" fill="rgb(100,100,100)" :points="
-            `${cube.p1.x} ${cube.p1.y}
-            , ${cube.p2.x} ${cube.p2.y}
-            , ${cube.p3.x} ${cube.p3.y}
-            , ${cube.p4.x} ${cube.p4.y}
+            <polyline filter="url(#shadow)" fill="rgb(0,0,0)" :points="
+            `${cube.p1.x + shadow.p1.x} ${cube.p1.y + shadow.p1.y }
+            , ${cube.p2.x + shadow.p2.x} ${cube.p2.y + shadow.p2.y}
+            , ${cube.p3.x + shadow.p3.x} ${cube.p3.y + shadow.p3.y}
+            , ${cube.p4.x + shadow.p4.x} ${cube.p4.y + shadow.p4.y}
             `" />
 
             <!-- Left Side -->
@@ -125,8 +134,31 @@
                 p7: { x: 450, y: 450 },
                 p8: { x: 450, y: 150 },
             },
+            shadow: {
+                p1: { x: -2, y: -2 },
+                p2: { x: -2, y: 2 },
+                p3: { x: 2, y: 2 },
+                p4: { x: 2, y: -2 },
+            },
+            initialShadow: {
+                p1: { x: -2, y: -2 },
+                p2: { x: -2, y: 2 },
+                p3: { x: 2, y: 2 },
+                p4: { x: 2, y: -2 },
+            },
         },
     })
+
+    // Define a new component called button-counter
+    Vue.component('d2-app', {
+        template: `
+        <div>
+            <svg style="border: 1px solid black; width:100vw; height: 100vh">
+                <slot></slot>
+            </svg>
+        </div>`
+    })
+
 </script>
 
 </html>
