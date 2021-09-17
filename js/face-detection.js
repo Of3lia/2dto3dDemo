@@ -47,40 +47,16 @@ function openCvReady() {
                 xf = xf + alpha * (faces.get(0).x - xf);
                 yf = yf + alpha * (faces.get(0).y - yf);
 
-                app.cube.p5.x = 150 + (xf - 250) * 0.3;
-                app.cube.p5.y = 150 + (yf - 120) * -0.3;
-
-                app.cube.p6.x = 150 + (xf - 250) * 0.3;
-                app.cube.p6.y = 450 + (yf - 120) * -0.3;
-
-                app.cube.p7.x = 450 + (xf - 250) * 0.3;
-                app.cube.p7.y = 450 + (yf - 120) * -0.3;
-
-                app.cube.p8.x = 450 + (xf - 250) * 0.3;
-                app.cube.p8.y = 150 + (yf - 120) * -0.3;
-
-
-                app.shadow.p1.x = app.initialShadow.p1.x + (xf - 250) * -0.05;
-                app.shadow.p1.y = app.initialShadow.p1.y + (yf - 120) * 0.05;
-
-                app.shadow.p2.x = app.initialShadow.p2.x + (xf - 250) * -0.05;
-                app.shadow.p2.y = app.initialShadow.p2.y + (yf - 120) * 0.05;
-
-                app.shadow.p3.x = app.initialShadow.p3.x + (xf - 250) * -0.05;
-                app.shadow.p3.y = app.initialShadow.p3.y + (yf - 120) * 0.05;
-
-                app.shadow.p4.x = app.initialShadow.p4.x + (xf - 250) * -0.05;
-                app.shadow.p4.y = app.initialShadow.p4.y + (yf - 120) * 0.05;
-
-
+                app.xf = (xf - 250) * 0.05;
+                app.yf = (yf - 150) * 0.05;
 
             } else {
-                // app.cube.p5.x = 300 + (xf - 300) * 0.2;
-                // app.cube.p5.y = 300 + (yf - 200) * -0.2;
             }
             let delay = 1000 / FPS - (Date.now() - begin);
-            setTimeout(processVideo, delay);
+
+            requestAnimationFrame(processVideo);
         }
-        setTimeout(processVideo, 0);
+
+        processVideo();
     };
 }

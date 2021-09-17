@@ -4,12 +4,21 @@ var d2Edges = Vue.component('d2-edges', {
         }
     },
     props: {
-        edges: Array,
+        xf: '',
+        yf: '',
+        position: Array,
+        points: Array,
         showEdges: Boolean,
     },
     template: `
     <g v-if="showEdges">
-        <line v-for="edge in edges" :x1="edge[0]" :y1="edge[1]" :x2="edge[2]" :y2="edge[3]" stroke="black"/>
+        <g v-for="point in points">
+            <path v-for="node in point[3]" :d="\`
+                M \${point[0] + xf * (point[2] / 80)} \${points[i][1] - yf * (point[2] / 80)}
+                L \${points[node][0] + xf * (points[node][2] / 80)} 
+                \${points[node][1] - yf * (points[node][2] / 80)}
+                \`" fill="transparent" stroke="black"/>
+        </g>
     </g>
     `
 })

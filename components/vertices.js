@@ -4,12 +4,18 @@ var d2Vertices = Vue.component('d2-vertices', {
         }
     },
     props: {
-        vertices: Array,
+        xf: '',
+        yf: '',
+        position: Array,
+        points: Array,
         showVertices: Boolean,
     },
     template: `
     <g v-if="showVertices">
-        <circle v-for="vertex in vertices" :cx="vertex[0]" :cy="vertex[1]" r="4" fill="red"/>
+        <circle v-for="point in points" 
+        :cx="point[0] + xf * (point[2] / 80)" 
+        :cy="point[1] - yf * (point[2] / 80)"
+        :r="4" fill="red"/>
     </g>
     `
 })

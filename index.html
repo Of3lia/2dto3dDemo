@@ -33,7 +33,7 @@
     </div>
     <div id="app" v-cloak>
         <svg style="width:100vw; height: 100vh">
-            <d2-cuboid :width=100></d2-cuboid>
+            <d2-cuboid :xf="xf" :yf="yf" :width=100></d2-cuboid>
         </svg>
 
         <svg style="display:none; border: 1px solid black; width:100vw; height: 100vh">
@@ -125,6 +125,8 @@
     var app = new Vue({
         el: '#app',
         data: {
+            xf: '',
+            yf: '',
             cube: {
                 p1: { x: 100, y: 100 },
                 p2: { x: 100, y: 500 },
@@ -150,15 +152,15 @@
         },
     })
 
-    // Define a new component called button-counter
-    Vue.component('d2-app', {
-        template: `
-        <div>
-            <svg style="border: 1px solid black; width:100vw; height: 100vh">
-                <slot></slot>
-            </svg>
-        </div>`
-    })
+    // // Define a new component called button-counter
+    // Vue.component('d2-app', {
+    //     template: `
+    //     <div>
+    //         <svg style="border: 1px solid black; width:100vw; height: 100vh">
+    //             <slot></slot>
+    //         </svg>
+    //     </div>`
+    // })
 
 </script>
 
