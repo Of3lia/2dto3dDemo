@@ -62,15 +62,17 @@
             `" />
 
             <!-- Left Side -->
-            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(150,150,150)" :points="
+            <polyline stroke="rgba(0,0,0)" stroke-width="2px" fill="rgba(150,150,150)" :points="
             `${cube.p1.x} ${cube.p1.y}
             , ${cube.p2.x} ${cube.p2.y}
             , ${cube.p6.x} ${cube.p6.y}
             , ${cube.p5.x} ${cube.p5.y}
+            , ${cube.p1.x} ${cube.p1.y}
+            
             `" />
 
             <!-- Right Side -->
-            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(50,50,50)" :points="
+            <polyline stroke="rgba(0,0,0)" stroke-width="2px" fill="rgba(50,50,50)" :points="
             `${cube.p3.x} ${cube.p3.y}
             , ${cube.p4.x} ${cube.p4.y}
             , ${cube.p8.x} ${cube.p8.y}
@@ -78,7 +80,7 @@
             `" />
 
             <!-- Top Side -->
-            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(70,70,70)" :points="
+            <polyline stroke="rgba(0,0,0)" stroke-width="2px" fill="rgba(70,70,70)" :points="
             `${cube.p1.x} ${cube.p1.y}
             , ${cube.p4.x} ${cube.p4.y}
             , ${cube.p8.x} ${cube.p8.y}
@@ -86,7 +88,7 @@
             `" />
 
             <!-- Bottom Side -->
-            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(130,130,130)" :points="
+            <polyline stroke="rgba(0,0,0)" stroke-width="2px" fill="rgba(130,130,130)" :points="
                `${cube.p2.x} ${cube.p2.y}
                , ${cube.p3.x} ${cube.p3.y}
                , ${cube.p7.x} ${cube.p7.y}
@@ -94,7 +96,7 @@
                `" />
 
             <!-- Front Face -->
-            <polyline stroke="rgba(0,0,0)" stroke-width="1px" fill="rgba(130,130,130)" :points="
+            <polyline stroke="rgba(0,0,0)" stroke-width="2px" fill="rgba(130,130,130)" :points="
             `${cube.p5.x} ${cube.p5.y}
             , ${cube.p6.x} ${cube.p6.y}
             , ${cube.p7.x} ${cube.p7.y}
@@ -107,14 +109,17 @@
                   namespace could be omitted, but it is mandatory in the
                   context of an SVG document
                 -->
-                <div style="margin: 1em;">
-                    <h2>Welcome to 2d 2 3D!</h2>
-
-                    <P>This is a new awesome technology.</P>
-                    <p>We can:</p>
-                    <ul>
-                        <li>Project 3D objects in a 2D screen</li>
-                    </ul>
+                <div style="margin: 1em; text-align:center">
+                    <h2>Hello</h2>
+                    <br>
+                    <p>
+                        You have to activate your camera if you want to see this demo working.
+                    </p>
+                    <br>
+                    <p>
+                        This is a 2D cuboid that is going to change the perspective
+                        when you move your face using OpenCV
+                    </p>
                 </div>
             </foreignObject>
 

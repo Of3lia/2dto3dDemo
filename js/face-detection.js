@@ -27,6 +27,9 @@ function openCvReady() {
         const alpha = 0.5;                  // low-pass filter correction factor
         const coord_scale_factor = 0.06;  // scaling factor to provide valid coords to three.js
 
+        var difX;
+        var difY;
+
         function processVideo() {
             let begin = Date.now();
             cap.read(src);
@@ -46,13 +49,30 @@ function openCvReady() {
 
                 xf = xf + alpha * (faces.get(0).x - xf);
                 yf = yf + alpha * (faces.get(0).y - yf);
+                if (Math.abs(difX - xf) > 1 || Math.abs(difY - yf) > 1) {
 
-                app.xf = (xf - 250) * 0.05;
-                app.yf = (yf - 150) * 0.05;
+                    app.cube.p5.x = 150 + (xf - 250) * 0.4;
+                    app.cube.p5.y = 150 + (yf - 120) * -0.4;
+
+                    app.cube.p6.x = 150 + (xf - 250) * 0.4;
+                    app.cube.p6.y = 450 + (yf - 120) * -0.4;
+
+                    app.cube.p7.x = 450 + (xf - 250) * 0.4;
+                    app.cube.p7.y = 450 + (yf - 120) * -0.4;
+
+                    app.cube.p8.x = 450 + (xf - 250) * 0.4;
+                    app.cube.p8.y = 150 + (yf - 120) * -0.4;
+
+                    app.xf = (xf - 250) * 0.05;
+                    app.yf = (yf - 150) * 0.05;
+                }
+
+                difX = xf;
+                difY = yf;
 
             } else {
             }
-            let delay = 1000 / FPS - (Date.now() - begin);
+            // let delay = 1000 / FPS - (Date.now() - begin);
 
             requestAnimationFrame(processVideo);
         }
